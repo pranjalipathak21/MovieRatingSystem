@@ -1,0 +1,9 @@
+com\movie\data\webapp\controller\MovieRatingsController.class
+com\movie\data\webapp\repository\model\User.class
+com\movie\data\webapp\repository\model\Rating.class
+com\movie\data\webapp\RatingsDataServiceApplication.class
+com\movie\data\webapp\service\RatingDataService.class
+com\movie\data\webapp\view\model\ViewRating.class
+com\movie\data\webapp\view\model\ViewUser.class
+com\movie\data\webapp\repository\RatingRepository.class
+com\movie\data\webapp\repository\UserRepository.class

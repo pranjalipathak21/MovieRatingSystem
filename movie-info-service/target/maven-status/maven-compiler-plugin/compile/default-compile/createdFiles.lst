@@ -1,0 +1,5 @@
+com\movie\info\webapp\model\Movie.class
+com\movie\info\webapp\service\MovieInfoService.class
+com\movie\info\webapp\repository\MovieRepository.class
+com\movie\info\webapp\controller\MovieInfoController.class
+com\movie\info\webapp\MovieInfoServiceApplication.class

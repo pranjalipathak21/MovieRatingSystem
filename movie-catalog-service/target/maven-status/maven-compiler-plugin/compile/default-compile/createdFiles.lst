@@ -1,0 +1,8 @@
+com\movie\catalog\webapp\service\MovieInfoService.class
+com\movie\catalog\webapp\model\CatalogItem.class
+com\movie\catalog\webapp\MovieCatlogServiceApplication.class
+com\movie\catalog\webapp\service\UserRatingService.class
+com\movie\catalog\webapp\model\UserRating.class
+com\movie\catalog\webapp\model\Rating.class
+com\movie\catalog\webapp\controller\MovieCatalogController.class
+com\movie\catalog\webapp\model\Movie.class
