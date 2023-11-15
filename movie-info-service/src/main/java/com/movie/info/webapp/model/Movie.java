@@ -15,7 +15,7 @@ import javax.persistence.TemporalType;
 @Table(name = "MOVIE_TABLE")
 public class Movie {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "MOVIE_ID")
 	private long movieId;
 

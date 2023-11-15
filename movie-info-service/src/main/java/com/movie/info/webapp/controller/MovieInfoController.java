@@ -1,10 +1,7 @@
 package com.movie.info.webapp.controller;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,72 +22,47 @@ public class MovieInfoController {
 	@Autowired
 	private MovieInfoService movieService;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(MovieInfoController.class);
-
 	@RequestMapping("/movies")
 	public ResponseEntity<List<Movie>> getAllMovies() {
-		List<Movie> movies = null;
-		try {
-			movies = movieService.getAllMovies();
-			LOGGER.info("getAllMovies sucess");
-			return new ResponseEntity<>(movies, HttpStatus.OK);
-		} catch (Exception e) {
-			LOGGER.error("getAllMovies exception " + e.getMessage());
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		List<Movie> movies = movieService.getAllMovies();
+		return new ResponseEntity<>(movies, HttpStatus.OK);
 	}
 
 	@RequestMapping("/movies/{movieId}")
-	public ResponseEntity<Movie> getMovie(@PathVariable long movieId) {
-		Optional<Movie> optional = null;
-		try {
-			optional = movieService.getMovie(movieId);
-			Movie movie = optional.get();
-			LOGGER.info("getMovie sucess");
-			return new ResponseEntity<>(movie, HttpStatus.OK);
-		} catch (Exception e) {
-			LOGGER.error("getMovie eception " + e.getMessage());
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-
+	public ResponseEntity<?> getMovie(@PathVariable long movieId) {
+		Movie movie = movieService.getMovie(movieId);
+        if (movie != null) {
+            return new ResponseEntity<>(movie, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/movies")
 	public ResponseEntity<?> addMovie(@RequestBody Movie movie) {
-		try {
-			movieService.addMovie(movie);
-			LOGGER.info("addMovie sucess");
-			return new ResponseEntity(HttpStatus.CREATED);
-		} catch (Exception e) {
-			LOGGER.error("addMovie eception " + e.getMessage());
-			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		// Implement code to create a new movie entry
+		Movie createdMovie = movieService.addMovie(movie);
+		if (createdMovie != null) {
+            return new ResponseEntity<>(createdMovie, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/movies/{movieId}")
-	public ResponseEntity<?> updateMovie(@RequestBody Movie movie, @PathVariable String movieId) {
-
-		try {
-			movieService.updateMovie(movie, movieId);
-			LOGGER.info("updateMovie sucess");
-			return new ResponseEntity(HttpStatus.ACCEPTED);
-		} catch (Exception e) {
-			LOGGER.error("updateMovie eception " + e.getMessage());
-			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+	public ResponseEntity<?> updateMovie(@RequestBody Movie movie, @PathVariable Long movieId) {
+			Movie updatedMovie = movieService.updateMovie(movie, movieId);
+	        if (updatedMovie != null) {
+	            return new ResponseEntity<>(updatedMovie, HttpStatus.OK);
+	        } else {
+	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	        }
 		}
-	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/movies/{movieId}")
 	public ResponseEntity<?> deleteMovie(@PathVariable long movieId) {
-		try {
-			movieService.deleteMovie(movieId);
-			LOGGER.info("deleteMovie sucess");
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
-		} catch (Exception e) {
-			LOGGER.error("deleteMovie eception " + e.getMessage());
-			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-
+        movieService.deleteMovie(movieId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 }

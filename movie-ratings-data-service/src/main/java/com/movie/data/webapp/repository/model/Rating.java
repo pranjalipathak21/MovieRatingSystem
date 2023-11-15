@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class Rating {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	@JsonIgnore
 	private long Id;
